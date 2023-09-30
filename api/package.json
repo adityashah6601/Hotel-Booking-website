@@ -1,6 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
+  "proxy":"https://booking-app-rgop.onrender.com",
   "description": "",
   "main": "index.js",
   "scripts": {
