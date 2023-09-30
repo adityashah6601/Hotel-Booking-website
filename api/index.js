@@ -182,7 +182,7 @@ app.get('https://hotel-booking-website-md5h.onrender.com/bookings',async (req,re
   const userData = await getUserDataFromReq(req);
  res.json( await Booking.find({user:userData.id}).populate('place') );
 });
-app.listen(https://booking-app-rgop.onrender.com);
+app.listen('https://booking-app-rgop.onrender.com');
 //6:27:15 se dekhna h
 //password for atlas booking-app
 //3KL2qn9sMBIqCrnr
