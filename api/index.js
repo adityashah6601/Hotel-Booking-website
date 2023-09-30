@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads')); 
 app.use(cors({
     credentials:true,
-    origin:'https://booking-app-rgop.onrender.com'
+    origin:'https://hotel-booking-website-md5h.onrender.com'
 }));
 
 mongoose.connect(process.env.MONGO_URL);
@@ -37,7 +37,7 @@ app.get('/',(req,res)=> {
     res.json('test ok');
 });
 
-app.post('https://booking-app-rgop.onrender.com/register', async (req,res) => {  
+app.post('https://hotel-booking-website-md5h.onrender.com/register', async (req,res) => {  
   const {name,email,Password}=req.body;
   const userDoc = await User.create({
       name,
@@ -46,7 +46,7 @@ app.post('https://booking-app-rgop.onrender.com/register', async (req,res) => {
    });
    res.json(userDoc); 
 });
-app.post('https://booking-app-rgop.onrender.com/login', async (req,res) => {
+app.post('https://hotel-booking-website-md5h.onrender.com/login', async (req,res) => {
     const{email,Password} =req.body;
     const userDoc = await User.findOne({email});
     if(userDoc){
@@ -69,7 +69,7 @@ app.post('https://booking-app-rgop.onrender.com/login', async (req,res) => {
       res.json('not found');
     }
 });
- app.get('https://booking-app-rgop.onrender.com/profile',(req,res) =>{
+ app.get('https://hotel-booking-website-md5h.onrender.com/profile',(req,res) =>{
 const{token} = req.cookies;
 if(token){
   jwt.verify(token, jwtSecret, {}, async(err, userData) =>{
@@ -82,12 +82,12 @@ if(token){
 }
   
  }) 
- app.post('https://booking-app-rgop.onrender.com/logout',(req,res) =>{
+ app.post('https://hotel-booking-website-md5h.onrender.com/logout',(req,res) =>{
   res.cookie('token', '').json(true);
  })
  console.log({__dirname});
  
- app.post('https://booking-app-rgop.onrender.com/upload-by-link', async(req,res) =>{
+ app.post('https://hotel-booking-website-md5h.onrender.com/upload-by-link', async(req,res) =>{
   const{link} = req.body;
   const newName = 'photo'+ Date.now() + '.jpg';
  await imageDownloader.image({
@@ -98,7 +98,7 @@ if(token){
  });
 
  const photosMiddleware = multer({dest:'uploads/'});
- app.post('https://booking-app-rgop.onrender.com/upload',photosMiddleware.array('photos',100),(req,res) => {
+ app.post('https://hotel-booking-website-md5h.onrender.com/upload',photosMiddleware.array('photos',100),(req,res) => {
 const uploadedFiles = [];
   for(let i=0;i<req.files.length;i++){
   const {path,originalname} = req.files[i];
@@ -111,7 +111,7 @@ const uploadedFiles = [];
   res.json(uploadedFiles);
  });
 
- app.post('https://booking-app-rgop.onrender.com/places',(req,res) => {
+ app.post('https://hotel-booking-website-md5h.onrender.com/places',(req,res) => {
   mongoose.connect(process.env.MONGO_URL);
   const{token} = req.cookies;
   const {title,address,addedPhotos,description,
@@ -128,7 +128,7 @@ const uploadedFiles = [];
  res.json(NewPlaceDoc);
   })
  });
- app.get('https://booking-app-rgop.onrender.com/user-places', (req,res)=> {
+ app.get('https://hotel-booking-website-md5h.onrender.com/user-places', (req,res)=> {
   // mongoose.connect(process.env.MONGO_URL);
   const{token} = req.cookies;
   jwt.verify(token, jwtSecret, {}, async(err, userData) =>{
@@ -136,12 +136,12 @@ const uploadedFiles = [];
   res.json( await NewPlace.find({owner:id}) );
   });
 });
-app.get('https://booking-app-rgop.onrender.com/places/:id', async (req,res) => {
+app.get('https://hotel-booking-website-md5h.onrender.com/:id', async (req,res) => {
   mongoose.connect(process.env.MONGO_URL);
   const {id} = req.params;
   res.json(await NewPlace.findById(id));
 });
-app.put('https://booking-app-rgop.onrender.com/places', async (req,res) => {
+app.put('https://hotel-booking-website-md5h.onrender.com/places', async (req,res) => {
   const{token} = req.cookies;
   const {
   id,title,address,addedPhotos,description,
@@ -159,11 +159,11 @@ jwt.verify(token, jwtSecret, {}, async(err, userData) =>{
     }
 });
 });
-app.get('https://booking-app-rgop.onrender.com/places', async (req,res) => {
+app.get('https://hotel-booking-website-md5h.onrender.com/places', async (req,res) => {
   mongoose.connect(process.env.MONGO_URL);
   res.json( await NewPlace.find() );
 });
-app.post('https://booking-app-rgop.onrender.com/api/bookings', async (req, res) => {
+app.post('https://hotel-booking-website-md5h.onrender.com/api/bookings', async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const userData = await getUserDataFromReq(req);
   const {
@@ -178,11 +178,11 @@ app.post('https://booking-app-rgop.onrender.com/api/bookings', async (req, res) 
     throw err;
   });
 });
-app.get('https://booking-app-rgop.onrender.com/bookings',async (req,res) => { 
+app.get('https://hotel-booking-website-md5h.onrender.com/bookings',async (req,res) => { 
   const userData = await getUserDataFromReq(req);
  res.json( await Booking.find({user:userData.id}).populate('place') );
 });
-app.listen(4000);
+app.listen(https://booking-app-rgop.onrender.com);
 //6:27:15 se dekhna h
 //password for atlas booking-app
 //3KL2qn9sMBIqCrnr
