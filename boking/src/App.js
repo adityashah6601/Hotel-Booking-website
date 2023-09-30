@@ -14,7 +14,7 @@ import BookingsPage from './pages/BookingsPage';
 import BookingPage from './pages/BookingPage';
 // import PlacesFormPage from './pages/PlacesFormPage';
 
-axios.defaults.baseURL='http://localhost:4000','https://booking-app-rgop.onrender.com';
+axios.defaults.baseURL='http://localhost:4000';
 axios.defaults.withCredentials=true;
 function App() {
   return (
