@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads')); 
 app.use(cors({
     credentials:true,
-    origin:'https://booking-app-rgop.onrender.com',
+    origin:'https://booking-app-rgop.onrender.com','http://localhost:3000'
 }));
 
 mongoose.connect(process.env.MONGO_URL);
