@@ -37,7 +37,7 @@ app.get('/',(req,res)=> {
     res.json('test ok');
 });
 
-app.post('/register', async (req,res) => {  
+app.post('https://booking-app-rgop.onrender.com/register', async (req,res) => {  
   const {name,email,Password}=req.body;
   const userDoc = await User.create({
       name,
@@ -46,7 +46,7 @@ app.post('/register', async (req,res) => {
    });
    res.json(userDoc); 
 });
-app.post('/login', async (req,res) => {
+app.post('https://booking-app-rgop.onrender.com/login', async (req,res) => {
     const{email,Password} =req.body;
     const userDoc = await User.findOne({email});
     if(userDoc){
@@ -69,7 +69,7 @@ app.post('/login', async (req,res) => {
       res.json('not found');
     }
 });
- app.get('/profile',(req,res) =>{
+ app.get('https://booking-app-rgop.onrender.com/profile',(req,res) =>{
 const{token} = req.cookies;
 if(token){
   jwt.verify(token, jwtSecret, {}, async(err, userData) =>{
@@ -82,12 +82,12 @@ if(token){
 }
   
  }) 
- app.post('/logout',(req,res) =>{
+ app.post('https://booking-app-rgop.onrender.com/logout',(req,res) =>{
   res.cookie('token', '').json(true);
  })
  console.log({__dirname});
  
- app.post('/upload-by-link', async(req,res) =>{
+ app.post('https://booking-app-rgop.onrender.com/upload-by-link', async(req,res) =>{
   const{link} = req.body;
   const newName = 'photo'+ Date.now() + '.jpg';
  await imageDownloader.image({
@@ -98,7 +98,7 @@ if(token){
  });
 
  const photosMiddleware = multer({dest:'uploads/'});
- app.post('/upload',photosMiddleware.array('photos',100),(req,res) => {
+ app.post('https://booking-app-rgop.onrender.com/upload',photosMiddleware.array('photos',100),(req,res) => {
 const uploadedFiles = [];
   for(let i=0;i<req.files.length;i++){
   const {path,originalname} = req.files[i];
