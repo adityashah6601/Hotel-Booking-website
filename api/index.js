@@ -111,7 +111,7 @@ const uploadedFiles = [];
   res.json(uploadedFiles);
  });
 
- app.post('/places',(req,res) => {
+ app.post('https://booking-app-rgop.onrender.com/places',(req,res) => {
   mongoose.connect(process.env.MONGO_URL);
   const{token} = req.cookies;
   const {title,address,addedPhotos,description,
@@ -128,7 +128,7 @@ const uploadedFiles = [];
  res.json(NewPlaceDoc);
   })
  });
- app.get('/user-places', (req,res)=> {
+ app.get('https://booking-app-rgop.onrender.com/user-places', (req,res)=> {
   // mongoose.connect(process.env.MONGO_URL);
   const{token} = req.cookies;
   jwt.verify(token, jwtSecret, {}, async(err, userData) =>{
@@ -136,12 +136,12 @@ const uploadedFiles = [];
   res.json( await NewPlace.find({owner:id}) );
   });
 });
-app.get('/places/:id', async (req,res) => {
+app.get('https://booking-app-rgop.onrender.com/places/:id', async (req,res) => {
   mongoose.connect(process.env.MONGO_URL);
   const {id} = req.params;
   res.json(await NewPlace.findById(id));
 });
-app.put('/places', async (req,res) => {
+app.put('https://booking-app-rgop.onrender.com/places', async (req,res) => {
   const{token} = req.cookies;
   const {
   id,title,address,addedPhotos,description,
@@ -159,11 +159,11 @@ jwt.verify(token, jwtSecret, {}, async(err, userData) =>{
     }
 });
 });
-app.get('/places', async (req,res) => {
+app.get('https://booking-app-rgop.onrender.com/places', async (req,res) => {
   mongoose.connect(process.env.MONGO_URL);
   res.json( await NewPlace.find() );
 });
-app.post('/api/bookings', async (req, res) => {
+app.post('https://booking-app-rgop.onrender.com/api/bookings', async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const userData = await getUserDataFromReq(req);
   const {
@@ -178,7 +178,7 @@ app.post('/api/bookings', async (req, res) => {
     throw err;
   });
 });
-app.get('/bookings',async (req,res) => { 
+app.get('https://booking-app-rgop.onrender.com/bookings',async (req,res) => { 
   const userData = await getUserDataFromReq(req);
  res.json( await Booking.find({user:userData.id}).populate('place') );
 });
